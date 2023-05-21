@@ -82,7 +82,11 @@ def add_to_watchlist():
             db.session.add(new_movie)
             db.session.commit()
 
-            mov = Movie.query.all()
+
+            current_user_token = current_user.token
+
+            mov = Movie.query.filter_by(user_token=current_user_token).all()
+
             
             return render_template('watchlist.html', movies=mov)
 
@@ -92,7 +96,11 @@ def add_to_watchlist():
 @site.route('/watchlist')
 @login_required
 def watchlist():
-    movies = Movie.query.all()
+    
+    current_user_token = current_user.token
+
+    movies = Movie.query.filter_by(user_token=current_user_token).all()
+   
     return render_template('watchlist.html', movies=movies)
 
 
