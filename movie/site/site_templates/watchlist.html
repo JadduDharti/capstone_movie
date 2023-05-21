@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .box-shadow {
+        max-width: fit-content;
+        max-height: fit-content;
+        margin: 0 auto;
+        margin-top: 2%;
+        padding: 20px;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.616);
+        box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.616);
+        text-align: center;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .card {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border: 1px solid gray;
+        max-width: 400px;
+    }
+
+    .card-image {
+        height: 150px;
+        width: 100px;
+    }
+
+    .card-content {
+        margin-left: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        color: darkred;
+    }
+
+    .card-year,
+    .card-genre,
+    .card-type {
+        margin: 5px 0;
+    }
+
+    .delete-button {
+        margin-left: auto;
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+
+<div id="content">
+    <div class="box box-shadow">
+        <div class="head">
+            <h1 style="font-size: 38px; color: navy;">Your Watch List</h1>
+        </div>
+
+        {% if movies %}
+        <br><br>
+        <div class="card-container">
+            {% for movie in movies %}
+            <div class="card">
+                <img src="{{ movie.image_url }}" alt="{{ movie.title }}" class="card-image">
+                <div class="card-content">
+                    <h1 class="card-title">{{ movie.title }}</h1>
+                    <p class="card-year">Release Year: {{ movie.release_year }}</p>
+                    <p class="card-genre">Genre: {{ movie.genre }}</p>
+                    <p class="card-type">Movie Type: {{ movie.m_type }}</p>
+
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                        <input type="submit" class="delete-button" value="Remove">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        {% else %}
+        <p>No movies in watchlist</p>
+        {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock content %}

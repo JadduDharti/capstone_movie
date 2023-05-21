@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="box-shadow" style="margin-top: 5%; margin-bottom: 5%; margin-left: 35%;">
+    <br>
+    <br>
+    <h1>Sign In <span>(❁´◡`❁)</span></h1>
+    <br>
+    <br>
+
+    <!-- Form Parts here -->
+
+    <main class="container" style="display: flex; width: fit-content; font-size: initial;">
+
+        <div class="row">
+
+            <aside class="col-12 col-md-6">
+                {% include 'signin_form.html' %}
+            </aside>
+
+        </div>
+
+    </main>
+
+
+</div>
+
+{% endblock content %}
